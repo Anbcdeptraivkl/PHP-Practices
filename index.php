@@ -1,11 +1,39 @@
+<?php
+    include_once 'includes/db_handler.php';
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>PHP Practices</title>
 </head>
 
 <body>
-    <h1>Loopings</h1>
+    <h1>Database Handling</h1>
+    <!--Retrieve Data from Database and Call them to the PHP Code-->
+    <?php
+        $sql_select = "SELECT * FROM users;";
+        $result = mysqli_query($conn, $sql_select);
+        // Check if you are going to get any kind of Data result
+        $result_check = mysqli_num_rows($result);
+        if ($result_check > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo $row['user_uid'] . "<br /> ";
+            }
+        }
+        echo "<br />";
+        // Fetching with Conditions
+        $sql_select_1 = "SELECT * FROM users WHERE user_id = 1;";
+        $result_1 = mysqli_query($conn, $sql_select_1);
+        $res_check_1 = mysqli_num_rows($result_1);
+        if ($res_check_1 > 0) {
+            while ($row_1 = mysqli_fetch_assoc($result_1)) {
+                echo $row_1['user_first'] . " " . $row_1['user_last'] . "<br />" . $row_1['user_uid'] . "<br />";
+            }
+        }
+    ?>
 
+    <h1>Loopings</h1>
     <?php
         $numbers = array(4, 8, 10, 12);
 
